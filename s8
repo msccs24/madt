@@ -1,0 +1,84 @@
+Q1
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvLifecycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activity Lifecycle Events:\n"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:textColor="#000000" />
+</ScrollView>
+
+package com.example.lifecycleapp;
+import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    TextView tvLifecycle;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        tvLifecycle = findViewById(R.id.tvLifecycle);
+        showToastAndLog("onCreate");
+        tvLifecycle.append("onCreate\n");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        showToastAndLog("onStart");
+        tvLifecycle.append("onStart\n");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showToastAndLog("onResume");
+        tvLifecycle.append("onResume\n");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        showToastAndLog("onPause");
+        tvLifecycle.append("onPause\n");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        showToastAndLog("onStop");
+        tvLifecycle.append("onStop\n");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        showToastAndLog("onRestart");
+        tvLifecycle.append("onRestart\n");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        showToastAndLog("onDestroy");
+        // Don't update the TextView here (it might not be visible)
+    }
+
+    private void showToastAndLog(String methodName) {
+        Toast.makeText(this, methodName + " called", Toast.LENGTH_SHORT).show();
+    }
+}
+
+Q2
