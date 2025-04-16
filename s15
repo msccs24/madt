@@ -1,0 +1,284 @@
+Q1
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editTextNum1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Number 1"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextNum2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Number 2"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/btnSub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUBTRACT"
+        android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/btnMult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MULTIPLY"
+        android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/btnDiv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DIVIDE"/>
+</LinearLayout>
+
+package com.example.slip15_1;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText editTextNum1, editTextNum2;
+    Button btnAdd, btnSub, btnMult, btnDiv;
+
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextNum1 = findViewById(R.id.editTextNum1);
+        editTextNum2 = findViewById(R.id.editTextNum2);
+        btnAdd = findViewById(R.id.btnAdd);
+        btnSub = findViewById(R.id.btnSub);
+        btnMult = findViewById(R.id.btnMult);
+        btnDiv = findViewById(R.id.btnDiv);
+
+        // Addition
+        btnAdd.setOnClickListener(v -> calculateResult("+"));
+
+        // Subtraction
+        btnSub.setOnClickListener(v -> calculateResult("-"));
+
+        // Multiplication
+        btnMult.setOnClickListener(v -> calculateResult("*"));
+
+        // Division
+        btnDiv.setOnClickListener(v -> calculateResult("/"));
+    }
+
+    // Method to calculate and display result
+    private void calculateResult(String operation) {
+        String num1Str = editTextNum1.getText().toString().trim();
+        String num2Str = editTextNum2.getText().toString().trim();
+
+        // Validation for empty fields
+        if (TextUtils.isEmpty(num1Str) || TextUtils.isEmpty(num2Str)) {
+            Toast.makeText(this, "Please enter both numbers", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Parse numbers
+        double num1 = Double.parseDouble(num1Str);
+        double num2 = Double.parseDouble(num2Str);
+        double result = 0;
+
+        switch (operation) {
+            case "+":
+                result = num1 + num2;
+                break;
+            case "-":
+                result = num1 - num2;
+                break;
+            case "*":
+                result = num1 * num2;
+                break;
+            case "/":
+                if (num2 == 0) {
+                    Toast.makeText(this, "Division by zero is not allowed", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                result = num1 / num2;
+                break;
+        }
+
+        // Display the result in Toast
+        Toast.makeText(this, "Result: " + result, Toast.LENGTH_LONG).show();
+    }
+}
+
+Q2
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:text="Simple Bank Application"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/accountNumber"
+        android:hint="Account Number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/accountType"
+        android:hint="Account Type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/balance"
+        android:hint="Balance"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RadioGroup
+        android:id="@+id/accountChoice"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/checking"
+            android:text="Checking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/savings"
+            android:text="Savings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/createBtn"
+            android:text="Create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/balanceBtn"
+            android:text="Balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/depositBtn"
+            android:text="Deposit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/withdrawBtn"
+            android:text="Withdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>
+
+package com.example.helloworld;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    EditText accountNumber, accountType, balance;
+    RadioGroup accountChoice;
+    Button createBtn, balanceBtn, depositBtn, withdrawBtn;
+
+    double currentBalance = 0.0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        accountNumber = findViewById(R.id.accountNumber);
+        accountType = findViewById(R.id.accountType);
+        balance = findViewById(R.id.balance);
+        accountChoice = findViewById(R.id.accountChoice);
+        createBtn = findViewById(R.id.createBtn);
+        balanceBtn = findViewById(R.id.balanceBtn);
+        depositBtn = findViewById(R.id.depositBtn);
+        withdrawBtn = findViewById(R.id.withdrawBtn);
+
+        createBtn.setOnClickListener(v -> {
+            currentBalance = Double.parseDouble(balance.getText().toString());
+            Toast.makeText(this, "Account Created!", Toast.LENGTH_SHORT).show();
+        });
+
+        balanceBtn.setOnClickListener(v -> {
+            balance.setText(String.valueOf(currentBalance));
+        });
+
+        depositBtn.setOnClickListener(v -> {
+            double amt = Double.parseDouble(balance.getText().toString());
+            currentBalance += amt;
+            Toast.makeText(this, "Deposited: " + amt, Toast.LENGTH_SHORT).show();
+        });
+
+        withdrawBtn.setOnClickListener(v -> {
+            double amt = Double.parseDouble(balance.getText().toString());
+            if (amt <= currentBalance) {
+                currentBalance -= amt;
+                Toast.makeText(this, "Withdrawn: " + amt, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Insufficient funds", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
