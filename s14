@@ -1,0 +1,216 @@
+Q1
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Number"
+        android:inputType="number"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate Factorial"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Result will appear here"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingTop="10dp"/>
+</LinearLayout>
+
+package com.example.slip14_1;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText editTextNumber;
+    Button btnCalculate;
+    TextView textViewResult;
+
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editTextNumber = findViewById(R.id.editTextNumber);
+        btnCalculate = findViewById(R.id.btnCalculate);
+        textViewResult = findViewById(R.id.textViewResult);
+
+        // Calculate Button Click Listener
+        btnCalculate.setOnClickListener(v -> calculateFactorial());
+    }
+
+    // Method to calculate and display factorial
+    private void calculateFactorial() {
+        String numStr = editTextNumber.getText().toString().trim();
+
+        // Input validation
+        if (TextUtils.isEmpty(numStr)) {
+            Toast.makeText(this, "Please enter a number", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            int number = Integer.parseInt(numStr);
+
+            if (number < 0) {
+                Toast.makeText(this, "Please enter a non-negative number", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Calculate factorial
+            long factorial = 1;
+            for (int i = 1; i <= number; i++) {
+                factorial *= i;
+            }
+
+            textViewResult.setText("Factorial of " + number + " = " + factorial);
+
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid input. Please enter a valid number.", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+
+Q2
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <!-- EditText for email -->
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- EditText for password -->
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Button to trigger login -->
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"/>
+
+    <!-- TextView for showing validation message (optional) -->
+    <TextView
+        android:id="@+id/validationMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#FF0000"
+        android:layout_marginTop="16dp"
+        android:gravity="center"/>
+
+</LinearLayout>
+
+package com.example.slip6_1;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.util.Patterns;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText emailEditText, passwordEditText;
+    private Button loginButton;
+    private TextView validationMessage;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        loginButton = findViewById(R.id.loginButton);
+        validationMessage = findViewById(R.id.validationMessage);
+
+        // Set an OnClickListener for the login button
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                // Get the entered email and password
+                String email = emailEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString().trim();
+
+                // Validate the input
+                if (email.isEmpty() || password.isEmpty()) {
+                    validationMessage.setText("Email and password cannot be empty.");
+                } else if (!isValidEmail(email)) {
+                    validationMessage.setText("Please enter a valid email address.");
+                } else if (password.length() < 6) {
+                    validationMessage.setText("Password must be at least 6 characters long.");
+                } else {
+                    // Example credentials (you can modify this to check against a database or API)
+                    String correctEmail = "user@example.com";
+                    String correctPassword = "password123";
+
+                    if (email.equals(correctEmail) && password.equals(correctPassword)) {
+                        // If credentials are correct, show a success message
+                        Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // If credentials are incorrect, show an error message
+                        validationMessage.setText("Invalid email or password.");
+                    }
+                }
+            }
+        });
+    }
+
+    // Method to validate the email format
+    private boolean isValidEmail(String email) {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+}
