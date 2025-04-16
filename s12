@@ -1,0 +1,294 @@
+Q1
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageViewBulb"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/bulb_off"
+        android:layout_marginBottom="20dp" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="Turn OFF"
+        android:textOff="Turn ON" />
+</LinearLayout>
+
+package com.example.slip12_1;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    ToggleButton toggleButton;
+    ImageView imageViewBulb;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        toggleButton = findViewById(R.id.toggleButton);
+        imageViewBulb = findViewById(R.id.imageViewBulb);
+
+        // Toggle Button Click Listener
+        toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                imageViewBulb.setImageResource(R.drawable.bulb_on);  // Bulb ON
+                Toast.makeText(MainActivity.this, "Bulb is ON", Toast.LENGTH_SHORT).show();
+            } else {
+                imageViewBulb.setImageResource(R.drawable.bulb_off);  // Bulb OFF
+                Toast.makeText(MainActivity.this, "Bulb is OFF", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
+
+Q2
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your name:"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/name_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your name"
+        android:textSize="16sp" />
+
+    <!-- Message Input -->
+    <TextView
+        android:id="@+id/message_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your message:"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/message_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your message"
+        android:textSize="16sp" />
+
+    <!-- Text Format Options -->
+    <TextView
+        android:id="@+id/format_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Text Format:"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/bold_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bold" />
+
+        <RadioButton
+            android:id="@+id/italic_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Italic" />
+
+        <RadioButton
+            android:id="@+id/underline_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Underline" />
+    </RadioGroup>
+
+    <!-- Color Options -->
+    <TextView
+        android:id="@+id/color_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Text Color:"
+        android:textSize="18sp" />
+
+    <CheckBox
+        android:id="@+id/checkbox_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Red" />
+
+    <CheckBox
+        android:id="@+id/checkbox_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Blue" />
+
+    <CheckBox
+        android:id="@+id/checkbox_green"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Green" />
+
+    <!-- Displayed message label -->
+    <TextView
+        android:id="@+id/display_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message will appear here"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp" />
+
+    <!-- Buttons -->
+    <Button
+        android:id="@+id/display_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display Message"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/clear_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/exit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exit"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>
+
+package com.example.ass23;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText nameInput, messageInput;
+    private TextView displayLabel;
+    private RadioGroup radioGroup;
+    private CheckBox checkboxRed, checkboxBlue, checkboxGreen;
+    private Button displayButton, clearButton, exitButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        nameInput = findViewById(R.id.name_input);
+        messageInput = findViewById(R.id.message_input);
+        displayLabel = findViewById(R.id.display_label);
+        radioGroup = findViewById(R.id.radioGroup);
+        checkboxRed = findViewById(R.id.checkbox_red);
+        checkboxBlue = findViewById(R.id.checkbox_blue);
+        checkboxGreen = findViewById(R.id.checkbox_green);
+
+        displayButton = findViewById(R.id.display_button);
+        clearButton = findViewById(R.id.clear_button);
+        exitButton = findViewById(R.id.exit_button);
+
+        displayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameInput.getText().toString();
+                String message = messageInput.getText().toString();
+
+                if (name.isEmpty() || message.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Please enter both name and message", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String combinedMessage = name + ": " + message;
+                SpannableString spannableMessage = new SpannableString(combinedMessage);
+
+                // Apply text formatting (bold, italic, underline)
+                if (((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().equals("Bold")) {
+                    spannableMessage.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, combinedMessage.length(), 0);
+                } else if (((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().equals("Italic")) {
+                    spannableMessage.setSpan(new StyleSpan(android.graphics.Typeface.ITALIC), 0, combinedMessage.length(), 0);
+                } else if (((RadioButton) findViewById(radioGroup.getCheckedRadioButtonId())).getText().equals("Underline")) {
+                    spannableMessage.setSpan(new UnderlineSpan(), 0, combinedMessage.length(), 0);
+                }
+
+                // Apply text color based on checkboxes
+                if (checkboxRed.isChecked()) {
+                    displayLabel.setTextColor(Color.RED);
+                } else if (checkboxBlue.isChecked()) {
+                    displayLabel.setTextColor(Color.BLUE);
+                } else if (checkboxGreen.isChecked()) {
+                    displayLabel.setTextColor(Color.GREEN);
+                }
+
+                // Display the formatted message
+                displayLabel.setText(spannableMessage);
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nameInput.setText("");
+                messageInput.setText("");
+                displayLabel.setText("Message will appear here");
+                radioGroup.clearCheck();
+                checkboxRed.setChecked(false);
+                checkboxBlue.setChecked(false);
+                checkboxGreen.setChecked(false);
+            }
+        });
+
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+}
